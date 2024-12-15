@@ -1,0 +1,43 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy Application
+        run: |
+          # Replace with your deployment commands
+          aws elasticbeanstalk create-application-version \
+            --application-name "MyRasaApp" \
+            --version-label "v1" \
+            --source-bundle S3Bucket=my-bucket,S3Key=my-app.zip
+          aws elasticbeanstalk update-environment \
+            --application-name "MyRasaApp" \
+            --environment-name "MyRasaApp-env" \
+            --version-label "v1"
