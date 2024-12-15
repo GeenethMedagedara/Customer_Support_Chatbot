@@ -1,0 +1,143 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - moin
+    - hey there
+    - let's go
+    - hey dude
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: appreciation
+  examples: |
+    - thankyou
+    - thanks
+    - tku
+    - thank you
+    - thank u
+- intent: goodbye
+  examples: |
+    - cu
+    - good by
+    - cee you later
+    - good night
+    - bye
+    - goodbye
+    - have a nice day
+    - see you around
+    - bye bye
+    - see you later
+- intent: affirm
+  examples: |
+    - yes
+    - y
+    - indeed
+    - of course
+    - that sounds good
+    - correct
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't like that
+    - no way
+    - not really
+- intent: mood_great
+  examples: |
+    - perfect
+    - great
+    - amazing
+    - feeling like a king
+    - wonderful
+    - I am feeling very good
+    - I am great
+    - I am amazing
+    - I am going to save the world
+    - super stoked
+    - extremely good
+    - so so perfect
+    - so good
+    - so perfect
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+- intent: order_track
+  examples: |
+    - Where is my order ?
+    - Can I know where my order is ?
+    - Order track
+    - Track order
+    - Order where
+    - How long does it take to deliver my order ?
+    - Order deliver time ?
+    - Order location
+    - Current order location
+    - Current location of order
+    - i want to track my order
+- intent: order_number
+  examples: |
+    - My order number is [1234567890](number)
+    - Order number is [2233446677](number)
+    - [8845673244](number)
+    - number is [1432567842](number)
+    - no is [9467865432](number)
+    - this is my order number [3422314532](number)
+    - my order number is [2233445566](number)
+- intent: search_product
+  examples: |
+    - Do you have [Laptops](product_text)
+    - Do you have [Smartphones](product_text)
+    - Do you have [Headphones](product_text)
+    - Do you have [Earbuds](product_text)
+    - Do you have [Tablets](product_text)
+    - Do you have [Cameras](product_text)
+    - Do you have [Smartwatches](product_text)
+    - Any [Laptops](product_text)
+    - [Smartphones](product_text)
+    - I want to buy [Earbuds](product_text)
+    - May I know about the type of [Tablets](product_text) you have
+    - i want to buy a [laptop](product_text)
+    - i want to buy a [smartphone](product_text)
+    - i want buy a [laptop](product_text)
+- intent: buy_product
+  examples: |
+    - I want this [1](index) product
+    - Number [2](index)
+    - I want product number [3](index)
+    - I will buy no [1](index)
+    - Item [2](index) product
+    - [3](index)
+    - Give me no [3](index)
+    - i want this [1](index) product
+    - i want [2](index)
+    - Give me no [2](index)
+    - number [2](index)
+    - i want [1](index)

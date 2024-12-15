@@ -1,0 +1,120 @@
+version: '3.1'
+intents:
+- affirm
+- appreciation
+- bot_challenge
+- buy_product
+- deny
+- goodbye
+- greet
+- mood_great
+- mood_unhappy
+- order_number
+- order_track
+- search_product
+entities:
+- product_text
+- index
+- number
+#- name
+#- email
+slots:
+  order_no_value:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: number
+  product_category:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: product_text
+  user_product_data:
+    type: any
+    mappings:
+    - type: custom
+  item_no:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: index
+#  name:
+#    type: text
+#    influence_conversation: true
+#    mappings:
+#      - type: from_entity
+#        entity: name
+#  email:
+#    type: text
+#    influence_conversation: true
+#    mappings:
+#      - type: from_entity
+#        entity: email
+
+#forms:
+#  start_form:
+#    required_slots:
+#      - name
+#      - email
+
+
+responses:
+  utter_greet:
+  - text: |-
+      Hello! This is HyperTech. How can I help you? 
+       You can use this bot for Order tracking, Product Inquiry and Recommendations
+
+  utter_ask_name:
+    - text: Could you please give me your name ?
+
+  utter_ask_email:
+    - text: Could you please give me your email ?
+
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_thankyou_end:
+  - text: |-
+      Thankyou for choosing Hypertech. 
+      Good Bye !
+  utter_welcome:
+  - text: Your welcome
+  utter_sayagain:
+  - text: Could you say that again !
+  utter_more_information:
+  - text: Would you like to know more information of this product ?
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_order_track:
+  - text: Hi! Could you please provide me with your order number to track your order
+  utter_order_placed:
+  - text: |-
+      Ok! Your order has been placed. 
+       Thank you for choosing HyperTech !
+       Your order dispatch message will be sent to you shortly. 
+       To track your order please contact us the usual way :)
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false
+actions:
+- action_say_category_data
+- utter_thankyou_end
+- action_say_product_inquiry
+- utter_greet
+- utter_more_information
+- action_confirm_product
+- action_ask_chatgpt
+- utter_order_placed
+- utter_sayagain
+- utter_welcome
+- action_say_order_status
+- utter_order_track

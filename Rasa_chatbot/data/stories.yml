@@ -1,0 +1,372 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: track_order path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_track
+  - action: utter_order_track
+  - intent: order_number
+    entities:
+      - number: 1234567890
+  - slot_was_set:
+      - order_no_value: 1234567890
+  - action: action_say_order_status
+
+
+- story: product_inquiry path 1
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+      - product_text: laptop
+    - slot_was_set:
+      - product_category: laptop
+    - action: action_say_product_inquiry
+    - intent: affirm
+    - action: action_say_category_data
+    - intent: buy_product
+      entities:
+      - index: 3
+    - slot_was_set:
+      - item_no: 3
+    - action: action_confirm_product
+    - intent: affirm
+    - action: utter_order_placed
+
+
+#product_inquiry_first_second_agree
+- story: product_inquiry path 1
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+      - product_text: laptop
+    - slot_was_set:
+      - product_category: laptop
+    - action: action_say_product_inquiry
+    - intent: affirm
+    - action: action_say_category_data
+    - intent: buy_product
+      entities:
+      - index: 3
+    - slot_was_set:
+      - item_no: 3
+    - action: action_confirm_product
+    - intent: affirm
+    - action: utter_order_placed
+
+#product_inquiry_first_deny
+- story: product_inquiry path 2
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+      - product_text: laptop
+    - slot_was_set:
+      - product_category: laptop
+    - action: action_say_product_inquiry
+    - intent: deny
+    - action: utter_sayagain
+
+#product_inquiry_first_agree_second_deny_third_agree_forth_agree
+- story: product_inquiry path 3
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+      - product_text: laptop
+    - slot_was_set:
+      - product_category: laptop
+    - action: action_say_product_inquiry
+    - intent: affirm
+    - action: action_say_category_data
+    - intent: buy_product
+      entities:
+      - index: 3
+    - slot_was_set:
+      - item_no: 3
+    - action: action_confirm_product
+    - intent: deny
+    - action: utter_more_information
+    - intent: affirm
+    - action: action_ask_chatgpt
+    - intent: affirm
+    - action: utter_order_placed
+
+#product_inquiry_first_agree_second_deny_third_agree_forth_deny
+- story: product_inquiry path 4
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+      - product_text: laptop
+    - slot_was_set:
+      - product_category: laptop
+    - action: action_say_product_inquiry
+    - intent: affirm
+    - action: action_say_category_data
+    - intent: buy_product
+      entities:
+      - index: 3
+    - slot_was_set:
+      - item_no: 3
+    - action: action_confirm_product
+    - intent: deny
+    - action: utter_more_information
+    - intent: affirm
+    - action: action_ask_chatgpt
+    - intent: deny
+    - action: utter_thankyou_end
+
+#product_inquiry_first_agree_second_deny_third_deny
+- story: product_inquiry path 5
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: search_product
+      entities:
+      - product_text: laptop
+    - slot_was_set:
+      - product_category: laptop
+    - action: action_say_product_inquiry
+    - intent: affirm
+    - action: action_say_category_data
+    - intent: buy_product
+      entities:
+      - index: 3
+    - slot_was_set:
+      - item_no: 3
+    - action: action_confirm_product
+    - intent: deny
+    - action: utter_more_information
+    - intent: deny
+    - action: utter_thankyou_end
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_track
+  - action: utter_order_track
+  - intent: order_number
+    entities:
+    - number: '2233445566'
+  - slot_was_set:
+    - order_no_value: '2233445566'
+  - action: action_say_order_status
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - product_text: laptop
+  - slot_was_set:
+    - product_category: laptop
+  - action: action_say_product_inquiry
+  - intent: affirm
+  - action: action_say_category_data
+  - slot_was_set:
+    - user_product_data:
+      - product_id: 104
+        category: Laptops
+        description: 16-inch Retina display, M1 Pro chip, 16GB RAM, 1TB SSD
+        name: Apple MacBook Pro 16
+        price: 2499.99
+        quantity: 8
+        rating: 4.7
+        status: in_stock
+      - product_id: 103
+        category: Laptops
+        description: 13.4-inch FHD+, Intel i7 11th Gen, 16GB RAM, 512GB SSD
+        name: Dell XPS 13 Laptop
+        price: 1099.99
+        quantity: 15
+        rating: 4.5
+        status: in_stock
+  - intent: buy_product
+    entities:
+    - number: '1'
+  - slot_was_set:
+    - order_no_value: '1'
+  - intent: buy_product
+    entities:
+    - index: '1'
+  - intent: buy_product
+    entities:
+    - index: '1'
+  - slot_was_set:
+    - item_no: '1'
+  - action: action_confirm_product
+  - intent: affirm
+  - action: utter_order_placed
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - product_text: laptop
+  - slot_was_set:
+    - product_category: laptop
+  - action: action_say_product_inquiry
+  - intent: deny
+  - action: utter_sayagain
+  - intent: search_product
+    entities:
+    - product_text: smartphone
+  - slot_was_set:
+    - product_category: smartphone
+  - action: action_say_product_inquiry
+  - intent: affirm
+  - action: action_say_category_data
+  - slot_was_set:
+    - user_product_data:
+      - product_id: 102
+        category: Smartphones
+        description: 6.8-inch QHD+ display, 200MP camera, Snapdragon 8 Gen 2 processor
+        name: Samsung Galaxy S23 Ultra
+        price: 1199.99
+        quantity: 30
+        rating: 4.7
+        status: in_stock
+      - product_id: 101
+        category: Smartphones
+        description: 6.1-inch Super Retina XDR display, 48MP main camera, A16 Bionic chip
+        name: Apple iPhone 14 Pro
+        price: 999.99
+        quantity: 50
+        rating: 4.8
+        status: in_stock
+  - intent: buy_product
+    entities:
+    - number: '2'
+  - slot_was_set:
+    - order_no_value: '2'
+  - intent: buy_product
+    entities:
+    - index: '2'
+  - action: action_confirm_product
+  - slot_was_set:
+    - item_no: null
+  - intent: buy_product
+    entities:
+    - index: '2'
+  - slot_was_set:
+    - item_no: '2'
+  - action: action_confirm_product
+  - intent: affirm
+  - action: utter_order_placed
+  - intent: affirm
+  - intent: appreciation
+  - action: utter_welcome
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - product_text: laptop
+  - slot_was_set:
+    - product_category: laptop
+  - action: action_say_product_inquiry
+  - intent: affirm
+  - action: action_say_category_data
+  - slot_was_set:
+    - user_product_data:
+      - product_id: 104
+        category: Laptops
+        description: 16-inch Retina display, M1 Pro chip, 16GB RAM, 1TB SSD
+        name: Apple MacBook Pro 16
+        price: 2499.99
+        quantity: 8
+        rating: 4.7
+        status: in_stock
+      - product_id: 103
+        category: Laptops
+        description: 13.4-inch FHD+, Intel i7 11th Gen, 16GB RAM, 512GB SSD
+        name: Dell XPS 13 Laptop
+        price: 1099.99
+        quantity: 15
+        rating: 4.5
+        status: in_stock
+  - intent: buy_product
+    entities:
+    - index: '2'
+  - slot_was_set:
+    - item_no: '2'
+  - action: action_confirm_product
+  - intent: deny
+  - action: utter_more_information
+  - intent: affirm
+  - action: action_ask_chatgpt
+  - intent: affirm
+  - action: utter_order_placed
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: search_product
+    entities:
+    - product_text: laptop
+  - slot_was_set:
+    - product_category: laptop
+  - action: action_say_product_inquiry
+  - intent: affirm
+  - action: action_say_category_data
+  - slot_was_set:
+    - user_product_data:
+      - product_id: 104
+        category: Laptops
+        description: 16-inch Retina display, M1 Pro chip, 16GB RAM, 1TB SSD
+        name: Apple MacBook Pro 16
+        price: 2499.99
+        quantity: 8
+        rating: 4.7
+        status: in_stock
+      - product_id: 103
+        category: Laptops
+        description: 13.4-inch FHD+, Intel i7 11th Gen, 16GB RAM, 512GB SSD
+        name: Dell XPS 13 Laptop
+        price: 1099.99
+        quantity: 15
+        rating: 4.5
+        status: in_stock
+  - intent: buy_product
+    entities:
+    - index: '1'
+  - slot_was_set:
+    - item_no: '1'
+  - action: action_confirm_product
+  - intent: deny
+  - action: utter_more_information
+  - intent: deny
+  - action: utter_thankyou_end
