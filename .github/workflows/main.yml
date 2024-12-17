@@ -1,5 +1,5 @@
 #name: Lint and Code Quality
-name: Build workflow
+name: Lint and Code Quality
 
 on:
   push:
@@ -10,8 +10,8 @@ on:
       - main
 
 jobs:
-#  build:
-#    runs-on: ubuntu-latest
+  lint:
+    runs-on: ubuntu-latest
 #    steps:
 #      - name: Checkout Code
 #        uses: actions/checkout@v3
