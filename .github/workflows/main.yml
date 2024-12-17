@@ -1,5 +1,5 @@
 #name: Lint and Code Quality
-name: Test workflow
+name: Build workflow
 
 on:
   push:
