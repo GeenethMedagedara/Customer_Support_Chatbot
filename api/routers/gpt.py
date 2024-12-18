@@ -1,3 +1,6 @@
+"""
+Function handles the routing for getting gpt response
+"""
 from fastapi import APIRouter, HTTPException
 from api.schemas.message_request_gpt import MessageRequest  # Import the BaseModel
 from api.config import settings

@@ -1,3 +1,6 @@
+"""
+Function handles the routing for the chatbot to chat
+"""
 from fastapi import APIRouter, HTTPException
 from datetime import datetime, timezone, timedelta
 from api.schemas.message_chat import Message

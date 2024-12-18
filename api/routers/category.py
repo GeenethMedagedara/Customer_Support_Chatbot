@@ -1,3 +1,6 @@
+"""
+Function handles the routing for getting items by category
+"""
 from fastapi import APIRouter, HTTPException
 from api.config import settings
 from aiobotocore.session import get_session
@@ -11,12 +14,6 @@ router = APIRouter()
 
 @router.post("/category/", response_model=List[Product])
 async def get_items_by_category(product_request: ProductRequest):
-    # async with get_session().create_client(
-    #     'dynamodb',
-    #     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-    #     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    #     region_name=settings.AWS_REGION
-    # ) as dynamodb_client:
     async with get_dynamodb_client() as dynamodb_client:
         try:
             items = await filter_items_by_category(

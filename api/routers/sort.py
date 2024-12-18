@@ -1,3 +1,6 @@
+"""
+Function handles the routing for sorting unique category values
+"""
 from api.config import settings
 from fastapi import APIRouter, HTTPException
 from aiobotocore.session import get_session

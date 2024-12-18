@@ -1,3 +1,6 @@
+"""
+Service function to query the resent conversation
+"""
 from datetime import datetime, timezone, timedelta
 from api.services.db.dynamodb_query_conversations_session import query_conversations
 from fastapi import HTTPException

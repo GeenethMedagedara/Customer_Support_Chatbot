@@ -1,3 +1,6 @@
+"""
+Function handles the routing for getting order status
+"""
 from fastapi import APIRouter, HTTPException
 from api.config import settings
 from api.schemas.order_request_value import OrderRequest, Order
@@ -10,12 +13,6 @@ router = APIRouter()
 
 @router.post("/value/", response_model=Order)
 async def get_order(order_request: OrderRequest):
-    # async with get_session().create_client(
-    #     'dynamodb',
-    #     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-    #     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    #     region_name=settings.AWS_REGION
-    # ) as dynamodb_client:
     async with get_dynamodb_client() as dynamodb_client:
         try:
             # Fetch item from DynamoDB

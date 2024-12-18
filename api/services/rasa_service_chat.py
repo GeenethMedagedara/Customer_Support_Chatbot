@@ -1,3 +1,6 @@
+"""
+Service functions to converse with rasa server from fastapi
+"""
 import httpx
 from api.config import settings
 

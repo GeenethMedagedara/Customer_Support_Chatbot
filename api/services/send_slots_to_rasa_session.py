@@ -1,3 +1,6 @@
+"""
+Service function to set session slot back in the rasa chatbot
+"""
 import httpx
 from typing import Dict
 

@@ -1,3 +1,6 @@
+"""
+Service functions for the chatgpt api
+"""
 import httpx
 from fastapi import HTTPException
 

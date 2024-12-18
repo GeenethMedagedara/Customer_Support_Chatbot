@@ -1,3 +1,6 @@
+"""
+Function handles the routing for getting the last session
+"""
 from fastapi import APIRouter, HTTPException
 from api.schemas.conversation_request_session import ConversationRequest
 from api.services.dynamodb_json_to_normal_json_session import dynamodb_json_to_normal_json

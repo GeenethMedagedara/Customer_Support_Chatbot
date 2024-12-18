@@ -1,7 +1,8 @@
+"""
+Acts as main and handles all the routing
+"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-# import sys
-# print(sys.path)
 from .routers import chat, gpt, category, sort, session, restart, value
 
 

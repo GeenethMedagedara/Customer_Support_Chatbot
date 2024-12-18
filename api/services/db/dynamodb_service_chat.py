@@ -1,8 +1,14 @@
+"""
+Handles all the service functionality for chatbot conversation
+"""
 from datetime import datetime, timezone
 import aiobotocore.session
 from api.config import settings
 
 async def create_dynamodb_client():
+    """
+    Dynamodb client creation
+    """
     return aiobotocore.session.get_session().create_client(
         'dynamodb',
         aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
@@ -11,6 +17,9 @@ async def create_dynamodb_client():
     )
 
 async def store_conversation(client, table, conversation_id, created_at, slots, messages):
+    """
+    Storing conversations to recall later as sessions
+    """
     await client.put_item(
         TableName=table,
         Item={
@@ -23,6 +32,9 @@ async def store_conversation(client, table, conversation_id, created_at, slots, 
     )
 
 async def update_conversation(client, table, conversation_id, created_at, slots, new_messages):
+    """
+    Update the stored conversation
+    """
     await client.update_item(
         TableName=table,
         Key={

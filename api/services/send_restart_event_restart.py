@@ -1,3 +1,6 @@
+"""
+Service function to restart chatbot
+"""
 import httpx
 from fastapi import HTTPException
 

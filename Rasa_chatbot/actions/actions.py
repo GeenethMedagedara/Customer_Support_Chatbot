@@ -14,9 +14,10 @@ import httpx  # Async HTTP client for requests
 from rapidfuzz import process
 import ast
 
-
 class ActionSayOrderStatus(Action):
-
+    """
+    Function is used to check order status
+    """
     def name(self) -> Text:
         return "action_say_order_status"
 
@@ -29,7 +30,9 @@ class ActionSayOrderStatus(Action):
 
         # Order number validation
         if not order_number or int(len(order_number)) < 10 or int(len(order_number)) >= 12 or not order_number.isdigit():
-            dispatcher.utter_message(text="Sorry, your order number is invalid. Please provide a valid order number.")
+            dispatcher.utter_message(
+                text="Sorry, your order number is invalid. Please provide a valid order number."
+            )
             return [SlotSet("order_no_value", None)]
 
         url = "http://127.0.0.1:8000/value/"
@@ -81,7 +84,9 @@ class ActionSayOrderStatus(Action):
 
 
 class ActionSayProductInquiry(Action):
-
+    """
+    Function is used to confirm product name
+    """
     def name(self) -> Text:
         return "action_say_product_inquiry"
 
@@ -92,7 +97,9 @@ class ActionSayProductInquiry(Action):
         product_category_name = tracker.get_slot("product_category")
 
         if not product_category_name :
-            dispatcher.utter_message(text="Sorry, could you specify what you are looking for again !")
+            dispatcher.utter_message(
+                text="Sorry, could you specify what you are looking for again !"
+            )
             return []
 
         url = "http://127.0.0.1:8000/sort/"
@@ -114,9 +121,13 @@ class ActionSayProductInquiry(Action):
             # print(f"Match: {match}, Score: {score}, Index: {index}")
 
             if score > 70:  # Threshold for a good match
-                dispatcher.utter_message(text=f"Did you mean '{match}'?")
+                dispatcher.utter_message(
+                    text=f"Did you mean '{match}'?"
+                )
             else:
-                dispatcher.utter_message(text="Sorry, I couldn't find anything matching your query.")
+                dispatcher.utter_message(
+                    text="Sorry, I couldn't find anything matching your query."
+                )
 
         except httpx.RequestError as e:
             # Handle connection issues
@@ -135,7 +146,9 @@ class ActionSayProductInquiry(Action):
         return []
 
 class ActionSayCategoryData(Action):
-
+    """
+    Function is used to get all the data related to a category
+    """
     def name(self) -> Text:
         return "action_say_category_data"
 
@@ -149,7 +162,9 @@ class ActionSayCategoryData(Action):
         product_category_name = tracker.get_slot("product_category")
 
         if not product_category_name:
-            dispatcher.utter_message(text="Sorry, could you specify what you are looking for again !")
+            dispatcher.utter_message(
+                text="Sorry, could you specify what you are looking for again !"
+            )
             return []
 
         try:
@@ -170,7 +185,9 @@ class ActionSayCategoryData(Action):
             if score > 70:  # Threshold for a good match
                 category = match
             else:
-                dispatcher.utter_message(text="wrong path")
+                dispatcher.utter_message(
+                    text="wrong path"
+                )
 
         except httpx.RequestError as e:
             # Handle connection issues
@@ -238,7 +255,9 @@ class ActionSayCategoryData(Action):
         return []
 
 class ActionConfirmProduct(Action):
-
+    """
+    Function is used to confirm the index number when referring to the product
+    """
     def name(self) -> Text:
         return "action_confirm_product"
 
@@ -283,7 +302,9 @@ class ActionConfirmProduct(Action):
         return []
 
 class ActionAskChatGPT(Action):
-
+    """
+    Function is used to get gpt response
+    """
     def name(self) -> Text:
         return "action_ask_chatgpt"
 
@@ -313,10 +334,14 @@ class ActionAskChatGPT(Action):
                 final_res = f"{chatgpt_response} \nWOULD YOU LIKE TO BUY THIS PRODUCT !"
 
                 # Send response back to RASA
-                dispatcher.utter_message(text=final_res)
+                dispatcher.utter_message(
+                    text=final_res
+                )
 
             except httpx.RequestError as exc:
-                dispatcher.utter_message(text="Sorry, I couldn't process your request.")
+                dispatcher.utter_message(
+                    text="Sorry, I couldn't process your request."
+                )
                 # print(f"An error occurred while requesting {exc.request.url!r}: {exc}")
 
         return []
