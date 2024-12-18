@@ -9,7 +9,7 @@ typing_extensions
 pydantic
 boto3
 uvicorn
-fastapi
+fastapi~=0.115.4
 pytest
 pylint
 pydantic-settings
