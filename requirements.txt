@@ -6,7 +6,7 @@ pytest-asyncio
 python-dotenv
 aiobotocore
 typing_extensions
-pydantic>=2.7.0
+pydantic
 boto3
 uvicorn
 fastapi~=0.115.4
