@@ -11,4 +11,4 @@ boto3
 uvicorn
 fastapi~=0.115.4
 pytest
-
+pylint
