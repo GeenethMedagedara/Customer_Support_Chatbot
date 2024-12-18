@@ -1,3 +1,6 @@
+"""
+Service function used to get the session id
+"""
 async def query_conversations(client, table_name: str, conversation_id: str):
     """Query DynamoDB for conversations by conversation_id."""
     return await client.query(

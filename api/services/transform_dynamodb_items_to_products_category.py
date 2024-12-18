@@ -1,3 +1,6 @@
+"""
+Used to transform all from dynamodb json to normal json
+"""
 from typing import List, Dict
 from api.schemas.product_request_category_sort import Product
 

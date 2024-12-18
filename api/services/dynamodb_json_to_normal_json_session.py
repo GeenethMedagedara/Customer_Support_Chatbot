@@ -1,3 +1,6 @@
+"""
+Another service function to convert dynamodb json to normal json
+"""
 from boto3.dynamodb.types import TypeDeserializer
 from typing import Dict
 

@@ -1,3 +1,6 @@
+"""
+Service function to get all the unique categories from dynamodb
+"""
 from typing import List, Dict
 
 async def extract_unique_categories(items: List[Dict]) -> List[str]:

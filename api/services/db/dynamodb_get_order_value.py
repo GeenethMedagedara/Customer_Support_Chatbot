@@ -1,3 +1,6 @@
+"""
+Service function ot get the order status
+"""
 async def get_order_from_dynamodb(client, table_name: str, order_id: int):
     """Fetch an order item from the DynamoDB table."""
     response = await client.get_item(

@@ -1,8 +1,8 @@
 """
 Test cases for API endpoints using pytest and FastAPI test client.
 """
-import pytest
 import asyncio
+import pytest
 from fastapi.testclient import TestClient
 from ..main import app
 
@@ -32,7 +32,9 @@ def test_chat_with_chatbot():
     """
     Test the /chat/ endpoint to verify chatbot conversation handling.
     """
-    response = client.post("/chat/", json={"sender": "test", "message": "thankyou"})
+    response = client.post("/chat/", json={
+        "sender": "test", "message": "thankyou"
+    })
     assert response.status_code == 200
 
     # Extract the response JSON
@@ -57,7 +59,11 @@ def test_order_status():
     """
     response = client.post("/value/", json={"order_id": "1234567890"})
     assert response.status_code == 200
-    assert response.json() == {'order_id': 1234567890, 'name': 'Test set', 'qty': 1, 'status': 'test', 'total': 1000.0}
+    assert response.json() == {
+        'order_id': 1234567890,
+        'name': 'Test set', 'qty': 1,
+        'status': 'test', 'total': 1000.0
+    }
     print("Check order status: SUCCESSFUL 3")
 
 @pytest.mark.asyncio
@@ -92,6 +98,8 @@ def test_chatgpt():
     """
     Test the /gpt/ endpoint to verify gpt works.
     """
-    response = client.post("/gpt/", json={"message": "This just a test to test my fastapi server"})
+    response = client.post("/gpt/", json={
+        "message": "This just a test to test my fastapi server"
+    })
     assert response.status_code == 200
     print("ChatGPT availability: SUCCESSFUL 7")

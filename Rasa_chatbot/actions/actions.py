@@ -29,7 +29,9 @@ class ActionSayOrderStatus(Action):
         order_number = tracker.get_slot("order_no_value")
 
         # Order number validation
-        if not order_number or int(len(order_number)) < 10 or int(len(order_number)) >= 12 or not order_number.isdigit():
+        if (not order_number or int(len(order_number)) < 10
+                or int(len(order_number)) >= 12
+                or not order_number.isdigit()):
             dispatcher.utter_message(
                 text="Sorry, your order number is invalid. Please provide a valid order number."
             )
@@ -40,7 +42,8 @@ class ActionSayOrderStatus(Action):
         try:
             # Make an asynchronous POST request to the FastAPI server
             async with httpx.AsyncClient() as client:
-                response = await client.post(url, json={"order_id": order_number}) #, timeout=10.0
+                response = await client.post(url,
+                                             json={"order_id": order_number}) #, timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
                 # print(f"ordered {response.json()}")
 
@@ -322,7 +325,9 @@ class ActionAskChatGPT(Action):
         async with httpx.AsyncClient() as client:
             try:
                 # Send user message to FastAPI server
-                response = await client.post("http://127.0.0.1:8000/gpt/", json={"message": message}, timeout=10.0)
+                response = await client.post(
+                    "http://127.0.0.1:8000/gpt/",
+                    json={"message": message}, timeout=10.0)
 
                 # Check for successful response
                 if response.status_code == 200:
