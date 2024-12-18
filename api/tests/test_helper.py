@@ -59,7 +59,7 @@ def test_getting_latest_session():
 
 @pytest.mark.asyncio
 def test_getting_items_by_category():
-    response = client.post("/category/", json={"category": "Test"})
+    response = client.post("/category/", json={"category": "Table"})
     assert response.status_code == 200
     print("Retrieving items by category: SUCCESSFUL 6")
 

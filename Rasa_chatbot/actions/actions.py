@@ -39,7 +39,7 @@ class ActionSayOrderStatus(Action):
             async with httpx.AsyncClient() as client:
                 response = await client.post(url, json={"order_id": order_number}) #, timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
-                print(f"ordered {response.json()}")
+                # print(f"ordered {response.json()}")
 
             # Parse the JSON response from FastAPI
             item = response.json()
@@ -68,14 +68,14 @@ class ActionSayOrderStatus(Action):
             dispatcher.utter_message(
                 text="There was a network error while retrieving your order. Please try again later."
             )
-            print(f"Network error: {str(e)}")
+            # print(f"Network error: {str(e)}")
 
         except httpx.HTTPStatusError as e:
             # Handle HTTP errors
             dispatcher.utter_message(
                 text=f"Unable to retrieve order information (HTTP {e.response.status_code}). Please try again later."
             )
-            print(f"HTTP error: {e.response.status_code} - {e.response.text}")
+            # print(f"HTTP error: {e.response.status_code} - {e.response.text}")
 
         return []
 
@@ -96,14 +96,14 @@ class ActionSayProductInquiry(Action):
             return []
 
         url = "http://127.0.0.1:8000/sort/"
-        print(f"product category name is : {product_category_name}")
+        # print(f"product category name is : {product_category_name}")
 
         try:
             # Make an asynchronous POST request to the FastAPI server
             async with httpx.AsyncClient() as client:
                 response = await client.post(url)  # , timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
-                print(f"THis is the responce: {response.json()}")
+                # print(f"THis is the responce: {response.json()}")
 
 
             # Parse the list response from FastAPI
@@ -111,7 +111,7 @@ class ActionSayProductInquiry(Action):
 
             # Fuzzy match user input with product names
             match, score, index = process.extractOne(product_category_name, items)
-            print(f"Match: {match}, Score: {score}, Index: {index}")
+            # print(f"Match: {match}, Score: {score}, Index: {index}")
 
             if score > 70:  # Threshold for a good match
                 dispatcher.utter_message(text=f"Did you mean '{match}'?")
@@ -123,14 +123,14 @@ class ActionSayProductInquiry(Action):
             dispatcher.utter_message(
                 text="There was a network error while retrieving your product category. Please try again later."
             )
-            print(f"Network error: {str(e)}")
+            # print(f"Network error: {str(e)}")
 
         except httpx.HTTPStatusError as e:
             # Handle HTTP errors
             dispatcher.utter_message(
                 text=f"Unable to retrieve order information (HTTP {e.response.status_code}). Please try again later."
             )
-            print(f"HTTP error: {e.response.status_code} - {e.response.text}")
+            # print(f"HTTP error: {e.response.status_code} - {e.response.text}")
 
         return []
 
@@ -157,7 +157,7 @@ class ActionSayCategoryData(Action):
             async with httpx.AsyncClient() as client:
                 response = await client.post("http://127.0.0.1:8000/sort/")  # , timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
-                print(f"THis is the responce: {response.json()}")
+                # print(f"THis is the responce: {response.json()}")
 
 
             # Parse the list response from FastAPI
@@ -165,7 +165,7 @@ class ActionSayCategoryData(Action):
 
             # Fuzzy match user input with product names
             match, score, index = process.extractOne(product_category_name, items)
-            print(f"Match: {match}, Score: {score}, Index: {index}")
+            # print(f"Match: {match}, Score: {score}, Index: {index}")
 
             if score > 70:  # Threshold for a good match
                 category = match
@@ -177,26 +177,26 @@ class ActionSayCategoryData(Action):
             dispatcher.utter_message(
                 text="There was a network error while retrieving your product category. Please try again later."
             )
-            print(f"Network error: {str(e)}")
+            # print(f"Network error: {str(e)}")
 
         except httpx.HTTPStatusError as e:
             # Handle HTTP errors
             dispatcher.utter_message(
                 text=f"Unable to retrieve order information (HTTP {e.response.status_code}). Please try again later."
             )
-            print(f"HTTP error: {e.response.status_code} - {e.response.text}")
+            # print(f"HTTP error: {e.response.status_code} - {e.response.text}")
 
         try:
             # Make an asynchronous POST request to the FastAPI server
             async with httpx.AsyncClient() as client:
                 response = await client.post("http://127.0.0.1:8000/category/", json={"category": category})  # , timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
-                print(f"THis is the response: {response}")
-                print(f"THis is the response json: {response.json()}")
+                # print(f"THis is the response: {response}")
+                # print(f"THis is the response json: {response.json()}")
 
             all_products = response.json()
 
-            print(f"Loop works {all_products}")
+            # print(f"Loop works {all_products}")
 
             if not all_products:
                 dispatcher.utter_message(
@@ -207,10 +207,10 @@ class ActionSayCategoryData(Action):
             dispatcher.utter_message(
                 text=f"These are all the products we have in {category} category."
             )
-            print("Loop works")
+            # print("Loop works")
             x = 1
             for product in all_products:
-                print("in loop")
+                # print("in loop")
                 dispatcher.utter_message(
                     text=f"{x}. Name: {product['name']} \n  Description: {product['description']} \n  Price: {product['price']} \t"
                 )
@@ -226,14 +226,14 @@ class ActionSayCategoryData(Action):
             dispatcher.utter_message(
                 text="There was a network error while retrieving your product category. Please try again later."
             )
-            print(f"Network error: {str(e)}")
+            # print(f"Network error: {str(e)}")
 
         except httpx.HTTPStatusError as e:
             # Handle HTTP errors
             dispatcher.utter_message(
                 text=f"Unable to retrieve order information (HTTP {e.response.status_code}). Please try again later."
             )
-            print(f"HTTP error: {e.response.status_code} - {e.response.text}")
+            # print(f"HTTP error: {e.response.status_code} - {e.response.text}")
 
         return []
 
@@ -247,8 +247,8 @@ class ActionConfirmProduct(Action):
                   domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         item_no = tracker.get_slot("item_no")
-        print(item_no)
-        print(type(item_no), item_no)
+        # print(item_no)
+        # print(type(item_no), item_no)
 
         if not item_no or int(len(item_no)) > 2:
             dispatcher.utter_message(
@@ -317,6 +317,6 @@ class ActionAskChatGPT(Action):
 
             except httpx.RequestError as exc:
                 dispatcher.utter_message(text="Sorry, I couldn't process your request.")
-                print(f"An error occurred while requesting {exc.request.url!r}: {exc}")
+                # print(f"An error occurred while requesting {exc.request.url!r}: {exc}")
 
         return []

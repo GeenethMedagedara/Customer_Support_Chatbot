@@ -5,17 +5,13 @@ from api.services.send_slots_to_rasa_session import send_slots_to_rasa
 from api.services.process_recent_conversation_session import process_recent_conversation
 from api.config import settings
 from aiobotocore.session import get_session
+from api.utils.aws_client import get_dynamodb_client
 
 router = APIRouter()
 
 @router.post("/session/")
 async def get_recent_conversation(request: ConversationRequest):
-    async with get_session().create_client(
-        'dynamodb',
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-        region_name=settings.AWS_REGION
-    ) as dynamodb_client:
+    async with get_dynamodb_client() as dynamodb_client:
         try:
             # Fetch the recent conversation
             latest_item = await process_recent_conversation(
