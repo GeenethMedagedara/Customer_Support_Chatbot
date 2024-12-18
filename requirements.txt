@@ -9,8 +9,8 @@ typing_extensions
 pydantic
 boto3
 uvicorn
-fastapi~=0.115.4
+fastapi
 pytest
 pylint
 pydantic-settings
-PyYAML==6.0.2
+PyYAML
