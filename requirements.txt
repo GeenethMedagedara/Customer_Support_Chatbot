@@ -8,7 +8,6 @@ aiobotocore
 typing_extensions
 pydantic>=2.7.0
 boto3
-pydantic-settings>=2.7.0
 uvicorn
 fastapi~=0.115.4
 pytest
