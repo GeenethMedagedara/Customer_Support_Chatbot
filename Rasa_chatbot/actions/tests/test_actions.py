@@ -4,18 +4,18 @@ The following functions tests the main processes of the rasa actions server
 import pytest
 from rasa_sdk import Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.types import DomainDict
 from ..actions import ActionSayOrderStatus
 from ..actions import ActionSayProductInquiry
 from ..actions import ActionSayCategoryData
-from ..actions import ActionConfirmProduct
 
 @pytest.fixture
 def dispatcher():
     """Fixture for creating a dispatcher instance."""
     return CollectingDispatcher()
 
-#ORDER--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+Testing functions related to ordering 
+"""
 @pytest.fixture
 def tracker_with_order_number():
     """Tracker with a pre-filled order number slot."""
@@ -44,7 +44,9 @@ def tracker_without_order_number():
         latest_action_name="action_listen"
     )
 
-#PRODUCT_INQUIRY----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+Testing functions related to getting category name 
+"""
 @pytest.fixture
 def tracker_with_product_category_name():
     """Tracker with a pre-filled product category name slot."""
@@ -73,7 +75,9 @@ def tracker_without_product_category_name():
         latest_action_name="action_listen"
     )
 
-#CATEGORY_DATA----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+Testing functions related to getting all category data
+"""
 @pytest.fixture
 def tracker_with_product_category_name_say_category_data():
     """Tracker with a pre-filled product category name slot."""
@@ -102,41 +106,14 @@ def tracker_without_product_category_name_say_category_data():
         latest_action_name="action_listen"
     )
 
-#CONFIRM_PRODUCT----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-@pytest.fixture
-def tracker_with_item_no_user_product_data():
-    """Tracker with a pre-filled product category name slot."""
-    return Tracker(
-        sender_id="test_user",
-        slots={"item_no": "1", "user_product_data": "[{'product_id': 999, 'category': 'Table', 'description': 'Test', 'name': 'Test', 'price': 9999.99, 'quantity': 1, 'rating': 5.0, 'status': 'in_stock'}]"},
-        latest_message={"intent": {"name": "buy_product"}},
-        events=[],
-        paused=False,
-        followup_action=None,
-        active_loop=None,
-        latest_action_name="action_listen"
-    )
-
-@pytest.fixture
-def tracker_without_item_no_user_product_data():
-    """Tracker without product category name slot."""
-    return Tracker(
-        sender_id="test_user",
-        slots={"item_no": None, "user_product_data": None},
-        latest_message={"intent": {"name": "buy_product"}},
-        events=[],
-        paused=False,
-        followup_action=None,
-        active_loop=None,
-        latest_action_name="action_listen"
-    )
-
 @pytest.fixture
 def domain():
     """Domain dictionary fixture."""
     return {"responses": {}}
 
-#ORDER--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+Testing and executing functions related to ordering 
+"""
 @pytest.mark.asyncio
 async def test_action_fetch_order_status_with_order_number(dispatcher, tracker_with_order_number, domain):
     action = ActionSayOrderStatus()
@@ -160,7 +137,9 @@ async def test_action_fetch_order_status_without_order_number(dispatcher, tracke
     messages = [message["text"] for message in dispatcher.messages]
     assert "Sorry, your order number is invalid. Please provide a valid order number." in messages
 
-#PRODUCT_INQUIRY----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+Testing and executing functions related to getting category name 
+"""
 @pytest.mark.asyncio
 async def test_action_confirm_product_name_with_product_category_name(dispatcher, tracker_with_product_category_name, domain):
     action = ActionSayProductInquiry()
@@ -181,7 +160,9 @@ async def test_action_confirm_product_name_without_product_category_name(dispatc
     messages = [message["text"] for message in dispatcher.messages]
     assert "Sorry, could you specify what you are looking for again !" in messages
 
-#CATEGORY_DATA----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
+Testing and executing functions related to getting all category data
+"""
 @pytest.mark.asyncio
 async def test_action_fetch_category_data_with_product_category_name(dispatcher, tracker_with_product_category_name_say_category_data, domain):
     action = ActionSayCategoryData()
@@ -203,14 +184,6 @@ async def test_action_fetch_category_data_with_product_category_name(dispatcher,
     assert first_item["description"] == "Test"
     assert first_item["name"] == "Test"
     assert first_item["price"] == 9999.99
-
-    # messages = [message["text"] for message in dispatcher.messages]
-    #
-    # # Validate the content of the messages
-    # assert len(messages) == 3  # Expecting exactly 3 messages
-    # assert "These are all the products we have in Table category." in messages[0]  # Check the content of the first message
-    # assert "1. Name: Test Description: Test Price: 9999.99" in messages[1]  # Check the content of the second message
-    # assert "Please use the index number when referring to the item you are interested in." in messages[2]  # Check the content of the third message
 
 
 @pytest.mark.asyncio

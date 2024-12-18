@@ -12,3 +12,4 @@ uvicorn
 fastapi~=0.115.4
 pytest
 pylint
+pydantic-settings
