@@ -26,7 +26,40 @@ jobs:
     - name: Build and Push API Image
       run: |
         docker build -f ./api/Dockerfile.fastapi -t api ./api
-        docker tag api:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/api:latest
-        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/api:latest
+        docker tag fastapi:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/fastapi:latest
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/fastapi:latest
 
-    
+    - name: Build and Push Rasa Image
+      run: |
+        docker build -f ./rasa/Dockerfile.rasa -t rasa ./rasa
+        docker tag rasa-chatbot:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-chatbot:latest
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-chatbot:latest
+
+    - name: Build and Push Rasa Actions Image
+      run: |
+        docker build -f ./rasa/actions/Dockerfile.actions -t rasa-actions ./rasa/actions
+        docker tag rasa-actions:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-actions:latest
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-actions:latest
+
+    - name: Build and Push Frontend Image
+      run: |
+        docker build -f ./frontend/Dockerfile.frontend -t frontend ./frontend
+        docker tag react-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:latest
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:latest
+
+  deploy_to_ecs:
+    name: Deploy to Amazon ECS
+    needs: build_and_push_to_ecr
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Deploy to ECS
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ecs-task-definition.json
+        service: <ecs-service-name>
+        cluster: <ecs-cluster-name>
+        wait-for-service-stability: true
