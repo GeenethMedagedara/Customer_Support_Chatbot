@@ -25,25 +25,25 @@ jobs:
 
     - name: Build and Push API Image
       run: |
-        docker build -f ./api/Dockerfile.fastapi -t api ./api
+        docker build -f ./api/Dockerfile.fastapi -t fastapi:latest ./api
         docker tag fastapi:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/fastapi:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/fastapi:latest
 
     - name: Build and Push Rasa Image
       run: |
-        docker build -f ./rasa/Dockerfile.rasa -t rasa ./rasa
+        docker build -f ./rasa/Dockerfile.rasa -t rasa-chatbot:latest ./rasa
         docker tag rasa-chatbot:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-chatbot:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-chatbot:latest
 
     - name: Build and Push Rasa Actions Image
       run: |
-        docker build -f ./rasa/actions/Dockerfile.actions -t rasa-actions ./rasa/actions
+        docker build -f ./rasa/actions/Dockerfile.actions -t rasa-actions:latest ./rasa/actions
         docker tag rasa-actions:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-actions:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-actions:latest
 
     - name: Build and Push Frontend Image
       run: |
-        docker build -f ./frontend/Dockerfile.frontend -t frontend ./frontend
+        docker build -f ./frontend/Dockerfile.frontend -t react-app:latest ./frontend
         docker tag react-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:latest
 
