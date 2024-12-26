@@ -3,10 +3,12 @@ Function handles the routing for the chatbot to chat
 """
 from fastapi import APIRouter, HTTPException
 from datetime import datetime, timezone, timedelta
-from api.schemas.message_chat import Message
-from api.services.rasa_service_chat import send_message_to_rasa, get_tracker
-from api.services.db.dynamodb_service_chat import create_dynamodb_client, store_conversation, update_conversation
-from api.config import settings
+
+#Paths
+from ..schemas.message_chat import Message
+from ..services.rasa_service_chat import send_message_to_rasa, get_tracker
+from ..services.db.dynamodb_service_chat import create_dynamodb_client, store_conversation, update_conversation
+from ..config import settings
 
 router = APIRouter()
 

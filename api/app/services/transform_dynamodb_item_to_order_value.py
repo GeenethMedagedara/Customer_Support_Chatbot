@@ -2,7 +2,9 @@
 Used to transform all from normal json to dynamodb json
 """
 from typing import Dict
-from api.schemas.order_request_value import Order
+
+#Paths
+from ..schemas.order_request_value import Order
 
 async def transform_dynamodb_item_to_order(item: Dict) -> Order:
     """Convert a DynamoDB item to an Order Pydantic model."""

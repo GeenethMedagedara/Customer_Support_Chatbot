@@ -1,0 +1,4 @@
+.rasa/
+tests/
+models/
+actions/

@@ -4,11 +4,14 @@ Service function to restart chatbot
 import httpx
 from fastapi import HTTPException
 
+"""
+The normal url for rasa server is http://localhost:5005/webhooks/rest/webhook   etc... but wen dockerised use http://host.docker.internal:5005/webhooks/rest/webhook
+"""
 
 async def send_restart_event(sender: str):
     """Send a restart event to the Rasa tracker for a specific sender."""
     payload = {"event": "restart"}
-    url = f"http://localhost:5005/conversations/{sender}/tracker/events"
+    url = f"http://host.docker.internal:5005/conversations/{sender}/tracker/events"
 
     try:
         async with httpx.AsyncClient() as client:

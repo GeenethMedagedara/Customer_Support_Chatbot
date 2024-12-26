@@ -3,7 +3,9 @@ Handles all the service functionality for chatbot conversation
 """
 from datetime import datetime, timezone
 import aiobotocore.session
-from api.config import settings
+
+#Paths
+from ...config import settings
 
 async def create_dynamodb_client():
     """

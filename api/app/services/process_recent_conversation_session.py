@@ -2,8 +2,11 @@
 Service function to query the resent conversation
 """
 from datetime import datetime, timezone, timedelta
-from api.services.db.dynamodb_query_conversations_session import query_conversations
 from fastapi import HTTPException
+
+#Paths
+from .db.dynamodb_query_conversations_session import query_conversations
+
 
 
 async def process_recent_conversation(client, table_name: str, conversation_id: str):

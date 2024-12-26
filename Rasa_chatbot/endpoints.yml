@@ -10,8 +10,12 @@
 # Server which runs your custom actions.
 # https://rasa.com/docs/rasa/custom-actions
 
+
+# The normal url for rasa server is http://localhost:5005/webhooks/rest/webhook   etc... but when dockerised use http://host.docker.internal:5005/webhooks/rest/webhook
+
+
 action_endpoint:
-  url: "http://localhost:5055/webhook"
+  url: "http://host.docker.internal:5055/webhook"
 #  timeout: 50
   # Increase the timeout as needed (default is 5 seconds)
 

@@ -2,13 +2,14 @@
 Function handles the routing for getting the last session
 """
 from fastapi import APIRouter, HTTPException
-from api.schemas.conversation_request_session import ConversationRequest
-from api.services.dynamodb_json_to_normal_json_session import dynamodb_json_to_normal_json
-from api.services.send_slots_to_rasa_session import send_slots_to_rasa
-from api.services.process_recent_conversation_session import process_recent_conversation
-from api.config import settings
-from aiobotocore.session import get_session
-from api.utils.aws_client import get_dynamodb_client
+
+#Paths
+from ..schemas.conversation_request_session import ConversationRequest
+from ..services.dynamodb_json_to_normal_json_session import dynamodb_json_to_normal_json
+from ..services.send_slots_to_rasa_session import send_slots_to_rasa
+from ..services.process_recent_conversation_session import process_recent_conversation
+from ..config import settings
+from ..utils.aws_client import get_dynamodb_client
 
 router = APIRouter()
 

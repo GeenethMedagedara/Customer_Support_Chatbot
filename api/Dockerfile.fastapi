@@ -1,0 +1,21 @@
+# Use a lightweight Python base image
+FROM python:3.10-slim
+
+# Set the working directory for the container
+WORKDIR /app
+
+# Copy the requirements file to the working directory and install dependencies
+COPY ./requirements.txt ./
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copy the FastAPI project files into the working directory
+COPY ./app ./app
+
+# Set the PYTHONPATH to include the working directory
+ENV PYTHONPATH=/app
+
+# Expose the port FastAPI will run on
+EXPOSE 8000
+
+# Start the FastAPI server with uvicorn
+CMD ["python", "-m", "app.main"]

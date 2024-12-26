@@ -3,8 +3,10 @@ Acts as main and handles all the routing
 """
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import chat, gpt, category, sort, session, restart, value
+import uvicorn
 
+#Paths
+from .routers import gpt, category, session, restart, chat, value, sort
 
 app = FastAPI()
 
@@ -30,3 +32,6 @@ app.include_router(session.router, tags=["SESSION"])
 app.include_router(restart.router, tags=["RESTART"])
 app.include_router(value.router, tags=["VALUE"])
 
+# Main entry point for running the server
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

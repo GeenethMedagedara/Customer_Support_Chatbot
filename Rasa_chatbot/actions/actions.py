@@ -14,6 +14,10 @@ import httpx  # Async HTTP client for requests
 from rapidfuzz import process
 import ast
 
+"""
+The normal url for rasa server is http://localhost:5005/webhooks/rest/webhook   etc... but when dockerised use http://host.docker.internal:5005/webhooks/rest/webhook
+"""
+
 class ActionSayOrderStatus(Action):
     """
     Function is used to check order status
@@ -37,7 +41,7 @@ class ActionSayOrderStatus(Action):
             )
             return [SlotSet("order_no_value", None)]
 
-        url = "http://127.0.0.1:8000/value/"
+        url = "http://host.docker.internal:8000/value/"
 
         try:
             # Make an asynchronous POST request to the FastAPI server
@@ -105,7 +109,7 @@ class ActionSayProductInquiry(Action):
             )
             return []
 
-        url = "http://127.0.0.1:8000/sort/"
+        url = "http://host.docker.internal:8000/sort/"
         # print(f"product category name is : {product_category_name}")
 
         try:
@@ -173,7 +177,7 @@ class ActionSayCategoryData(Action):
         try:
             # Make an asynchronous POST request to the FastAPI server
             async with httpx.AsyncClient() as client:
-                response = await client.post("http://127.0.0.1:8000/sort/")  # , timeout=10.0
+                response = await client.post("http://host.docker.internal:8000/sort/")  # , timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
                 # print(f"THis is the responce: {response.json()}")
 
@@ -209,7 +213,7 @@ class ActionSayCategoryData(Action):
         try:
             # Make an asynchronous POST request to the FastAPI server
             async with httpx.AsyncClient() as client:
-                response = await client.post("http://127.0.0.1:8000/category/", json={"category": category})  # , timeout=10.0
+                response = await client.post("http://host.docker.internal:8000/category/", json={"category": category})  # , timeout=10.0
                 response.raise_for_status()  # Raise an error for 4xx/5xx responses
                 # print(f"THis is the response: {response}")
                 # print(f"THis is the response json: {response.json()}")
@@ -326,7 +330,7 @@ class ActionAskChatGPT(Action):
             try:
                 # Send user message to FastAPI server
                 response = await client.post(
-                    "http://127.0.0.1:8000/gpt/",
+                    "http://host.docker.internal:8000/gpt/",
                     json={"message": message}, timeout=10.0)
 
                 # Check for successful response

@@ -1,13 +1,14 @@
 """
 Function handles the routing for sorting unique category values
 """
-from api.config import settings
 from fastapi import APIRouter, HTTPException
-from aiobotocore.session import get_session
 from typing import List
-from api.services.db.dynamodb_scan_table_sort import scan_table
-from api.services.extract_unique_categories_sort import extract_unique_categories
-from api.utils.aws_client import get_dynamodb_client
+
+#Paths
+from ..config import settings
+from ..services.db.dynamodb_scan_table_sort import scan_table
+from ..services.extract_unique_categories_sort import extract_unique_categories
+from ..utils.aws_client import get_dynamodb_client
 
 router = APIRouter()
 

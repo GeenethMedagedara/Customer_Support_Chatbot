@@ -4,6 +4,8 @@ import {IoMdSend}  from 'react-icons/io';
 import {BiBot,BiUser} from 'react-icons/bi';
 import axios from "axios";
 
+//The normal url for rasa server is http://localhost:5005/webhooks/rest/webhook   etc... but when dockerised use http://host.docker.internal:5005/webhooks/rest/webhook
+
 function Chatbot(){
     const [chat,setChat] = useState([]);
     const [inputMessage,setInputMessage] = useState('');
@@ -23,7 +25,7 @@ function Chatbot(){
     const sessionUpdate = async () => {
         const name = "ghost";
         try {
-                const response = await axios.post('http://localhost:8000/session/', {sender: name});
+                const response = await axios.post('http://host.docker.internal:8000/session/', {sender: name});
                 const botResponse = JSON.stringify(response.data.messages);
 
 const arrayInput = JSON.parse(botResponse);
@@ -69,7 +71,7 @@ const transformed = arrayInput.map((item) => ({
 
         const sendToFastAPI = async (name, msg) => {
             try {
-                const response = await axios.post('http://localhost:8000/chat/', {
+                const response = await axios.post('http://host.docker.internal:8000/chat/', {
                     sender: name,
                     message: msg
                 });
@@ -105,7 +107,7 @@ const transformed = arrayInput.map((item) => ({
     const restartChat = async () => {
         const name = "ghost";
     try {
-        const response = await axios.post("http://localhost:8000/restart/", { sender: name });
+        const response = await axios.post("http://host.docker.internal:8000/restart/", { sender: name });
         console.log(response.data.message); // Log success message
         alert("Chat restarted successfully!");
     } catch (error) {

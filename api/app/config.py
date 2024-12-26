@@ -15,7 +15,8 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str
 
     class Config:
-        env_file = str(Path(__file__).parent.parent / ".env")
+        # env_file = str(Path(__file__).parent.parent / ".env")
+        env_file = str(Path(__file__).parent / ".env")
 
 
 settings = Settings()

@@ -2,12 +2,13 @@
 Function handles the routing for getting order status
 """
 from fastapi import APIRouter, HTTPException
-from api.config import settings
-from api.schemas.order_request_value import OrderRequest, Order
-from api.services.transform_dynamodb_item_to_order_value import transform_dynamodb_item_to_order
-from api.services.db.dynamodb_get_order_value import get_order_from_dynamodb
-from aiobotocore.session import get_session
-from api.utils.aws_client import get_dynamodb_client
+
+#Paths
+from ..config import settings
+from ..schemas.order_request_value import OrderRequest, Order
+from ..services.transform_dynamodb_item_to_order_value import transform_dynamodb_item_to_order
+from ..services.db.dynamodb_get_order_value import get_order_from_dynamodb
+from ..utils.aws_client import get_dynamodb_client
 
 router = APIRouter()
 

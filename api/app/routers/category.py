@@ -2,13 +2,14 @@
 Function handles the routing for getting items by category
 """
 from fastapi import APIRouter, HTTPException
-from api.config import settings
-from aiobotocore.session import get_session
 from typing import List
-from api.schemas.product_request_category_sort import Product, ProductRequest
-from api.services.transform_dynamodb_items_to_products_category import transform_dynamodb_items_to_products
-from api.services.db.dynamodb_filter_items_category import filter_items_by_category
-from api.utils.aws_client import get_dynamodb_client
+
+#Paths
+from ..config import settings
+from ..schemas.product_request_category_sort import Product, ProductRequest
+from ..services.transform_dynamodb_items_to_products_category import transform_dynamodb_items_to_products
+from ..services.db.dynamodb_filter_items_category import filter_items_by_category
+from ..utils.aws_client import get_dynamodb_client
 
 router = APIRouter()
 

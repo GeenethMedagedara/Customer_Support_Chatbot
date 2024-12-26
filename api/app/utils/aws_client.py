@@ -3,7 +3,9 @@ Utility functions for creating AWS clients using aiobotocore.
 """
 from contextlib import asynccontextmanager
 from aiobotocore.session import get_session
-from api.config import settings
+
+#Paths
+from ..config import settings
 
 @asynccontextmanager
 async def get_dynamodb_client():
