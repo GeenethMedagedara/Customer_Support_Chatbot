@@ -1,9 +1,6 @@
 name: CI/CD Pipeline
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   build_and_push_to_ecr:
@@ -25,5 +22,11 @@ jobs:
       run: |
         aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | \
         docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+    - name: Build and Push API Image
+      run: |
+        docker build -f ./api/Dockerfile.fastapi -t api ./api
+        docker tag api:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/api:latest
+        docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/api:latest
 
     
