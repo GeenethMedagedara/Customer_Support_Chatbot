@@ -23,7 +23,7 @@ jobs:
         aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | \
         docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
 
-    - name: Build and Push API Image
+    - name: Build and Push FastAPI Image
       run: |
         docker build -f ./api/Dockerfile.fastapi -t fastapi:latest ./api
         docker tag fastapi:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/fastapi:latest
@@ -31,13 +31,13 @@ jobs:
 
     - name: Build and Push Rasa Image
       run: |
-        docker build -f ./Rasa_chatbot/Dockerfile.rasa -t rasa-chatbot:latest ./rasa
+        docker build -f ./Rasa_chatbot/Dockerfile.rasa -t rasa-chatbot:latest ./Rasa_chatbot
         docker tag rasa-chatbot:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-chatbot:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-chatbot:latest
 
     - name: Build and Push Rasa Actions Image
       run: |
-        docker build -f ./Rasa_chatbot/actions/Dockerfile.actions -t rasa-actions:latest ./rasa/actions
+        docker build -f ./Rasa_chatbot/actions/Dockerfile.actions -t rasa-actions:latest ./Rasa_chatbot/actions
         docker tag rasa-actions:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-actions:latest
         docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/rasa-actions:latest
 
