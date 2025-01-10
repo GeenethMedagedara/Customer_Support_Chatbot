@@ -53,16 +53,26 @@ jobs:
     needs: build_and_push_to_ecr
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Configure kubectl
-      run: |
-        aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name cluster1
+      - name: Configure kubectl
+        run: |
+          aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name cluster1
 
-    - name: Apply Kubernetes Manifests
-      run: |
-        kubectl apply -f k8s/fastapi-deployment.yaml
-        kubectl apply -f k8s/rasa-deployment.yaml
-        kubectl apply -f k8s/actions-deployment.yaml
-        kubectl apply -f k8s/frontend-deployment.yaml
+      - name: Validate Manifests
+        run: |
+          kubectl apply --dry-run=client -f k8s/fastapi-deployment.yaml
+          kubectl apply --dry-run=client -f k8s/rasa-deployment.yaml
+          kubectl apply --dry-run=client -f k8s/actions-deployment.yaml
+          kubectl apply --dry-run=client -f k8s/frontend-deployment.yaml
+
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f k8s/fastapi-deployment.yaml
+          kubectl apply -f k8s/rasa-deployment.yaml
+          kubectl apply -f k8s/actions-deployment.yaml
+          kubectl apply -f k8s/frontend-deployment.yaml
+
+      - name: Verify Kubernetes Context
+        run: kubectl config current-context
