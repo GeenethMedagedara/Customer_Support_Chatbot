@@ -51,3 +51,7 @@ docker-compose up --build
 - Push Docker images to **AWS ECR**
 - Apply Kubernetes configurations (kubectl apply -f k8s/)
 - Monitor deployment with kubectl get pods
+
+## Why This is Built
+
+This sample project is built to widen my understanding of pre-trained NLU and NLP models, how they are trained, how they are implemented in production, and also how they are deployed in a cloud-based environment using DevOps.
