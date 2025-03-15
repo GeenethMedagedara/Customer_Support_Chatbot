@@ -1,5 +1,7 @@
 # Customer Support Chatbot with Contextual AI Responses
 
+![Screenshot (613)](https://github.com/user-attachments/assets/987362a2-6d06-4bd1-9e27-3537e9c7d61d)
+
 ---
 
 ## Overview
