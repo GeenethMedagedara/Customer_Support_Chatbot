@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - rasa
+      - rasa-actions
+
+  rasa:
+    build:
+      context: ./Rasa_chatbot
+      dockerfile: Dockerfile.rasa
+    ports:
+      - "5005:5005"
+    depends_on:
+      - rasa-actions
+
+  rasa-actions:
+    build:
+      context: ./Rasa_chatbot/actions
+      dockerfile: Dockerfile.actions
+    ports:
+      - "5055:5055"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - fastapi

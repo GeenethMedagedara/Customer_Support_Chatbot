@@ -121,6 +121,7 @@ const transformed = arrayInput.map((item) => ({
         border: '1px solid black',
         paddingLeft: '0px',
         paddingRight: '0px',
+        marginLeft: '70px',
         borderRadius: '30px',
         boxShadow: '0 16px 20px 0 rgba(0,0,0,0.4)'
 
@@ -129,14 +130,16 @@ const transformed = arrayInput.map((item) => ({
         height: '4.5rem',
         borderBottom : '1px solid black',
         borderRadius: '30px 30px 0px 0px',
-        backgroundColor: '#8012c4',
+        backgroundColor: '#0066ff',
+        //#0066ff
+        // #8012c4
 
     }
     const styleFooter = {
         //maxWidth : '32rem',
         borderTop : '1px solid black',
         borderRadius: '0px 0px 30px 30px',
-        backgroundColor: '#8012c4',
+        backgroundColor: '#0066ff',
 
 
     }
@@ -150,8 +153,7 @@ const transformed = arrayInput.map((item) => ({
 
     return (
       <div>
-        <button onClick={()=>sessionUpdate()}>Try this</button>
-        <button onClick={()=>restartChat()}>Restart</button>
+        
 
 
         <div className="container">
@@ -203,10 +205,14 @@ const transformed = arrayInput.map((item) => ({
                             </form>
                         </div>
                     </div>
+                    <button className='pastbtn' onClick={()=>sessionUpdate()}>Past</button>
+                <button onClick={()=>restartChat()}>Restart</button>
                 </div>
-
+                
         </div>
+        
         </div>
+        
 
       </div>
     );
