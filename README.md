@@ -13,12 +13,12 @@ with a CI/CD pipeline via GitHub Actions for seamless automation.
 
 ## Table of Contents
 
-- Key Features
-- Tech Stack
-- Installation
-- Deployment
-- How project works (Detailed)
-- Why Built
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Installation](#installation-&-deployment)
+- [Deployment](#)
+- [How project works (Detailed)](#)
+- [Why Built](#)
 
 ## Key Features
 
