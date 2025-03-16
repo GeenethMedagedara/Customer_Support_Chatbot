@@ -82,6 +82,18 @@ Dynamodb database tables
 
 ![Screenshot 2025-03-16 200848](https://github.com/user-attachments/assets/98604ca9-b9c3-4333-974f-b0b5c8d40464)
 
-Amazon ECR
+Amazon Elastic Container Registry (ECR)
 
 ![Screenshot 2025-03-16 195958](https://github.com/user-attachments/assets/6c3c7e7c-d9fc-4bc2-8891-81f2e762b3aa)
+
+Amazon Elastic Kubernetes Service (EKS)
+
+![Screenshot 2025-03-16 211731](https://github.com/user-attachments/assets/0f65e2f3-caf6-479c-857b-fb0956a44ea1)
+
+VPCs and subnets
+
+![Screenshot 2025-03-16 212009](https://github.com/user-attachments/assets/14af4f89-990d-4d50-89e1-570a70b01444)
+
+EC2 Instances
+
+![Screenshot 2025-03-16 211900](https://github.com/user-attachments/assets/66ea6644-3fd2-4544-920b-2c4e8d9234f9)
