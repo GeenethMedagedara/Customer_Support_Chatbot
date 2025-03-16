@@ -77,3 +77,11 @@ docker-compose up --build
 This sample project is built to widen my understanding of pre-trained NLU and NLP models, how they are trained, how they are implemented in production, and also how they are deployed in a cloud-based environment using DevOps.
 
 ## Screenshots
+
+Dynamodb database tables
+
+![Screenshot 2025-03-16 200848](https://github.com/user-attachments/assets/98604ca9-b9c3-4333-974f-b0b5c8d40464)
+
+Amazon ECR
+
+![Screenshot 2025-03-16 195958](https://github.com/user-attachments/assets/6c3c7e7c-d9fc-4bc2-8891-81f2e762b3aa)
