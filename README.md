@@ -60,7 +60,7 @@ docker-compose up --build
 
 - Push Docker images to **AWS ECR**
 - Apply Kubernetes configurations (kubectl apply -f k8s/)
-- Monitor deployment with kubectl get pods
+- Use eksctl to create kubernetes clusters and automatically provision VPCs, subnets, worker nodes and node groups.
 
 ## How this project works
 
