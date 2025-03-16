@@ -11,6 +11,15 @@ Built with FastAPI, Rasa, and React, it integrates AWS DynamoDB for scalable dat
 Dockerized and deployed on AWS EKS using Kubernetes, 
 with a CI/CD pipeline via GitHub Actions for seamless automation.
 
+## Table of Contents
+
+- Key Features
+- Tech Stack
+- Installation
+- Deployment
+- How project works (Detailed)
+- Why Built
+
 ## Key Features
 
 - **Context-Aware Responses** – Understands user queries and maintains conversation flow.
@@ -25,7 +34,7 @@ with a CI/CD pipeline via GitHub Actions for seamless automation.
 - Backend: FastAPI, Python, AWS DynamoDB, OpenAI ChatGPT
 - Chatbot: Rasa (NLP, NLU, custom actions)
 - Frontend: React, Tailwind CSS
-- DevOps: Docker, Kubernetes (EKS), GitHub Actions
+- DevOps: Docker, Kubernetes (EKS), GitHub Actions, eksctl
 
 ## Installation & Deployment
 
@@ -51,6 +60,16 @@ docker-compose up --build
 - Push Docker images to **AWS ECR**
 - Apply Kubernetes configurations (kubectl apply -f k8s/)
 - Monitor deployment with kubectl get pods
+
+## How this project works
+
+> **Rasa** is a conversational AI framework for enterprises that natively leverages generative AI for effortless assistant development. The Rasa model can be fine-tuned according to the developer's preference. Rasa consists of two servers: one is the Rasa server that the chatbot is run on, and the other is the custom actions server that we can create custom actions for. This server is mainly used to connect with other APIs other than the conversation, e.g., like accessing the DynamoDB database to retrieve certain data.
+
+> The **FastAPI** server acts as a bridge between Rasa and external services (e.g., DynamoDB, OpenAI ChatGPT, React frontend) and also provides a high-performance, asynchronous API for handling chatbot requests.
+
+> **DynamoDB** is a NoSQL database optimized for high-speed and low-latency operations. This makes it easier to store user sessions, chat history, and contextual data for better conversation flow.
+
+> Next, **OpenAI ChatGPT** helps increase the chatbot response quality by giving insights about the products to the user.
 
 ## Why This is Built
 
