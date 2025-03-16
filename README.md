@@ -15,10 +15,10 @@ with a CI/CD pipeline via GitHub Actions for seamless automation.
 
 - [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation-&-deployment)
-- [Deployment](#)
-- [How project works (Detailed)](#)
-- [Why Built](#)
+- [Installation](#installation--deployment)
+- [Deployment](#deploy-to-aws-eks--github-actions)
+- [How project works (Detailed)](#how-this-project-works)
+- [Why Built](#why-this-is-built)
 
 ## Key Features
 
