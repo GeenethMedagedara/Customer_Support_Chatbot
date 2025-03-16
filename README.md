@@ -19,6 +19,7 @@ with a CI/CD pipeline via GitHub Actions for seamless automation.
 - [Deployment](#deploy-to-aws-eks--github-actions)
 - [How project works (Detailed)](#how-this-project-works)
 - [Why Built](#why-this-is-built)
+- [Screenshots](#screenshots)
 
 ## Key Features
 
@@ -74,3 +75,5 @@ docker-compose up --build
 ## Why This is Built
 
 This sample project is built to widen my understanding of pre-trained NLU and NLP models, how they are trained, how they are implemented in production, and also how they are deployed in a cloud-based environment using DevOps.
+
+## Screenshots
